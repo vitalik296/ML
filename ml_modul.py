@@ -144,18 +144,18 @@ class MlHandler(object):
             train_df = numeric_data.dropna(axis=0)
             y_train = train_df[column]
             train_df.drop(column, axis=1, inplace=True)
-            try:
-                linear_regression.fit(train_df, y_train)
-                X = numeric_data[numeric_data[column].isnull()].drop(column, axis=1)
+            # try:
+            linear_regression.fit(train_df, y_train)
+            X = numeric_data[numeric_data[column].isnull()].drop(column, axis=1)
 
-                if len(X):
-                    y_pred = linear_regression.predict(X=numeric_data[numeric_data[column].isnull()].drop(column, axis=1))
-                else:
-                    continue
-            except Exception as exp:
-                print(exp)
-                print("Columns have to be numerical")
-                return
+            if len(X):
+                y_pred = linear_regression.predict(X=numeric_data[numeric_data[column].isnull()].drop(column, axis=1))
+            else:
+                continue
+            # except Exception as exp:
+            #     print(exp)
+            #     print("Columns have to be numerical")
+            #     return
 
             i = 0
 
